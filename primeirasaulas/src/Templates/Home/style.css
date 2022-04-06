@@ -1,0 +1,21 @@
+.posts {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(20rem, 1fr));
+  padding: 1rem;
+}
+
+.posts-content {
+  margin: 0.5rem;
+  background: white;
+  box-shadow: 0 0 0.2rem rgba(0, 0, 0, 0.5);
+  padding: 0.5rem;
+  transition: all 0.5s;
+}
+
+.posts-content:hover {
+  transform: scale(1.02);
+}
+
+.posts-content img {
+  max-width: 100%;
+}
