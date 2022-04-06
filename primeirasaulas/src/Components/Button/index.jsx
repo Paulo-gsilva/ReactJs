@@ -1,6 +1,8 @@
+import './style.css';
+
 export default function Button({ onClick }) {
 
     return (
-        <button onClick={onClick}>Texto qualquer</button>
+        <button className="button" onClick={onClick}>Mais Cards</button>
     );
 }

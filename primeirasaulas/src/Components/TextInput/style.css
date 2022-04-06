@@ -1,0 +1,10 @@
+.search {
+    margin: 2% 2rem;
+}
+
+.search input {
+    width: 15em;
+    height: 2rem;
+    font-size: 1.5rem;
+    padding: 0.2rem;
+}

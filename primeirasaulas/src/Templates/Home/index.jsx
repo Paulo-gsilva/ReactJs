@@ -3,13 +3,15 @@ import { Component } from 'react';
 import LoadPosts from '../../Func/load.posts';
 import Posts from '../../Components/Posts';
 import Button from '../../Components/Button';
+import SearchInput from '../../Components/TextInput';
 
 class Home extends Component {
   state = {
     posts: [],
     allPosts: [],
     page: 0,
-    postsPerPage: 2
+    postsPerPage: 2,
+    searchValue: ''
   };
 
   componentDidMount() {
@@ -37,13 +39,41 @@ class Home extends Component {
     this.setState({ posts, page: nextPage });
   }
 
+  handleChange = (event) => {
+    const { value } = event.target;
+    this.setState({ searchValue: value });
+  }
+
   render() { //quando ocorre alguma alteração na página ela é renderizada
-    const { posts } = this.state;
+    const { posts, searchValue } = this.state;
+    const filteredPosts = !!searchValue ?
+      posts.filter(post => {
+        return post.title.toLocaleLowerCase().includes(searchValue.toLocaleLowerCase());
+      })
+      : posts;
 
     return (
       <>
-        <Posts posts={posts} />
-        <Button onClick={this.loadMorePosts} />
+        <div className='search'>
+          {!!searchValue && ( //se searchvalue for true (não vazio) mostrará o h1
+            <h1>Search Value</h1>
+          )}
+          <SearchInput
+            handleChange={this.handleChange}
+            value={searchValue}
+          />
+        </div>
+
+        {filteredPosts.length > 0 && (
+          <Posts posts={filteredPosts} />
+        )}
+        {filteredPosts.length === 0 && (
+          <p>Não Existem Posts :(</p>
+        )}
+
+        {!searchValue && ( //se searchvalue for false (vazio) ocultará o botão
+          <Button onClick={this.loadMorePosts} />
+        )}
       </>
     );
   }
