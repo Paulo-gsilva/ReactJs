@@ -18,6 +18,7 @@ export default function Home() {
     })
     : posts;
 
+
   const handleLoadPosts = useCallback(async (page, postsPerPage) => {
 
     const postsAndPhotos = await LoadPosts();
@@ -61,12 +62,13 @@ export default function Home() {
       {filteredPosts.length > 0 && (
         <Posts posts={filteredPosts} />
       )}
+      {/*envia um array*/}
       {filteredPosts.length === 0 && (
         <p>Não Existem Posts :(</p>
       )}
 
       {!searchValue && ( //se searchvalue for false (vazio) ocultará o botão
-        <Button onClick={loadMorePosts} />
+        <Button onClick={loadMorePosts} text={'Load More'} />
       )}
     </>
   );
