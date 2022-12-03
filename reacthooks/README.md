@@ -3,8 +3,21 @@
 -   **UseState**
 
     -   useState realiza a modificação do estado atual de um elemento
+
+    ```
+        const [colorRed, setColorRed] = useState(true);
+        //estado atual da variável 'colorRed' é true
+    ```
+
     -   useState é executado no momento em que o React entende que pode ser atualizado (assíncrono)
     -   useState com callback garante que o estado exato será alterado
+
+    ```
+        const handleChangeColor = () => {
+        //setColorRed(!colorRed);
+        setColorRed((colorRed) => !colorRed); // useState com callback garante que o estado exato será alterado
+    };
+    ```
 
 </br>
 
