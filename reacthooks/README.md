@@ -1,5 +1,7 @@
 # Arquivo para estudo de React Hooks
 
+##### _Lembre-se de acompanhar as explicações com o código em mãos para melhor entendimento_
+
 -   **UseState**
 
     -   useState realiza a modificação do estado atual de um elemento
@@ -54,3 +56,66 @@
         );
     }, [counter]);
     ```
+
+</br>
+
+-   **UseCallback**
+    -   UseCallback é usado para otimizaçãoes.
+    -   UseCallback salva funções
+    -   No react, funções são recriadas sempre que ocorre renderização, pode ser ruim dependendo do tamanho dessa funçao
+    -   UseCallback é recomendado para funções pesadas
+    -   **Exemplo:**
+        ```
+            const [counterMemo, setCounterMemo] = useState(0);
+        ```
+        Da forma abaixo, a função sempre será recriada, pois o useCallback depende do estado de CounterMemo, e o mesmo sempre está mudando ao clicar no botão
+        ```
+            const incrementCounterMemo = useCallback(
+                (number) => {
+                    setCounterMemo(counterMemo + number);
+                },
+                [counterMemo]
+            );
+        ```
+        Para sanar o problema acima, pode-se usar uma funçao de callback dentro do próprio useCallback, dessa forma, a função pegará o valor antigo do "SetCounterMemo", que é o "CounterMemo", sem precisar passar o mesmo como paramêtro
+        ```
+            const incrementCounterMemo = useCallback((number) => {
+                setCounterMemo((counter) => counter + number);
+            }, []);
+        ```
+
+</br>
+
+-   **UseMemo**
+
+    -   UseMemo é usado para otimizações
+    -   UseMemo armazena valores inalterados
+    -   UseMemo é bastante recomendado para listagem de elementos vindos de uma API. Uma tela apresenta vários elementos que são renderizados, caso haja mais renderizações conforme o uso, os elementos da API sempre serão chamados novamente, causando muitas renderizações.
+    -   **Exemplo:**
+
+    ```
+        const [posts, setPosts] = useState([]);
+        const [value, setValue] = useState("");
+
+        useEffect(() => {
+        fetch("https://jsonplaceholder.typicode.com/posts")
+            .then((posts) => posts.json())
+            .then((post) => setPosts(post));
+        }, []);
+
+        return (
+            <div className="App">
+                <h1>UseMemo</h1>
+                <input
+                    type="search"
+                    name="search"
+                    id="search"
+                    value={value}
+                    onChange={(e) => setValue(e.target.value)}
+                />
+                <Posts posts={posts} /> //ver arquivo Posts.jsx
+            </div>
+        );
+    ```
+
+    -   Nota-se que sempre que um valor for digitado no input, ocorrerá uma renderizaçao da página, e em cada renderização os dados da API são chamandos e renderizados na tela novamente. O UseMemo entra nessa hora, ele salva os Posts inalterados, evitando renderizações pesadas.
