@@ -140,3 +140,32 @@
     ```
 
     -   Nota-se que sempre que um valor for digitado no input, ocorrerá uma renderizaçao da página, e em cada renderização os dados da API são chamandos e renderizados na tela novamente. O UseMemo entra nessa hora, ele salva os Posts inalterados, evitando renderizações pesadas.
+
+</br>
+
+-   **UseRef**
+
+    -   UseRef é usado para refernciar elementos ou valores
+    -   UseRef não causa novas renderizações com alterações de valores
+    -   Com UseRef pode-se manipular elementos do DOM
+    -   Usando o ".current" você terá acesso ao "valor mutável" do elemento referenciado.
+    -   **Exemplo**:
+
+    ```
+        const [value, setValue] = useState("");
+        const inputRef = useRef(null); //cria referências
+
+        useEffect(() => {
+            inputRef.current.focus();
+        }, [value]);
+
+        <input
+                ref={inputRef} //faz a referência
+                type="search"
+                name="search"
+                id="search"
+                value={value}
+                onChange={(e) => setValue(e.target.value)}
+                style={{ width: "700px", fontSize: "20px" }}
+            />
+    ```
