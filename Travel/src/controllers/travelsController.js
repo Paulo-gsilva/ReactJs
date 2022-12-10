@@ -1,6 +1,6 @@
-import { database } from "../database.js";
+const database = require("../../database.js").database;
 
-export function getTravelList(req, res) {
+function getTravelList(req, res) {
   const query = "SELECT * FROM travelsystem.TouristSpot";
 
   database.query(query, (error, success) => {
@@ -9,3 +9,5 @@ export function getTravelList(req, res) {
     return res.status(200).json(success);
   });
 }
+
+module.exports = { getTravelList };

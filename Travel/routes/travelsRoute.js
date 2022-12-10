@@ -1,7 +1,8 @@
-import express from "express";
-import { getTravelList } from "../controllers/travelsController.js";
+const express = require("express");
+const getTravelList =
+  require("../src/controllers/travelsController.js").getTravelList;
 const router = express.Router();
 
 router.get("/", getTravelList);
 
-export default router;
+module.exports = { router };

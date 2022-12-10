@@ -1,6 +1,6 @@
-import express from "express";
-import cors from "cors";
-import travelsRoute from "./routes/travelsRoute.js";
+const express = require("express");
+const cors = require("cors");
+const travelsRoute = require("./routes/travelsRoute.js").router;
 const app = express();
 
 app.use(express.json());
@@ -9,6 +9,6 @@ app.use(cors());
 //ROTAS
 app.use("/", travelsRoute);
 
-app.listen(3000, () => {
-  console.log("server is active on port 3000");
+app.listen(8080, () => {
+  console.log("server is active on port 8080");
 });
