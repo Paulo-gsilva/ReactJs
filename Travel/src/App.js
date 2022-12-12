@@ -1,10 +1,15 @@
-import "./App.css";
+import GlobalStyle from "./styles/global";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import TravelPage from "./components/TravelPage/TravelPage";
 
 function App() {
   return (
-    <div className="App">
-      <h1>asdhuasd</h1>
-    </div>
+    <>
+      <TravelPage />
+      <ToastContainer autoClose={3000} position={toast.POSITION.BOTTOM_LEFT} />
+      <GlobalStyle />
+    </>
   );
 }
 
