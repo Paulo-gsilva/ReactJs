@@ -1,4 +1,5 @@
 import React from "react";
+import { AiFillEdit, AiFillDelete } from "react-icons/ai";
 import "../../../styles/gridtravels.css";
 
 function Cards({ travels }) {
@@ -19,6 +20,10 @@ function Cards({ travels }) {
                 {travel.TouristSpotCountry} - {travel.TouristSpotCity}
               </h4>
               <p>Adicionado em: {travel.TouristSpotAddData}</p>
+              <div className="card-icons">
+                <AiFillEdit />
+                <AiFillDelete />
+              </div>
             </div>
           </div>
         );
