@@ -15,7 +15,7 @@ function TravelPage() {
       setTravels(travelsList.data);
     } catch (error) {
       console.log(error);
-      toast.error("Não foi possível adicionar uma nova viagem 😥");
+      toast.error("Não foi possível carregar suas viagens 😥");
     }
   };
 
@@ -27,7 +27,11 @@ function TravelPage() {
     <section className="section-travelpage">
       <Title title="VIAGENS" />
       <Forms getTravelList={getTravelList} />
-      <GridTravels travels={travels} />
+      <GridTravels
+        travels={travels}
+        setTravels={setTravels}
+        getTravelList={getTravelList}
+      />
     </section>
   );
 }

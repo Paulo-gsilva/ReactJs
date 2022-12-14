@@ -33,4 +33,15 @@ function createTravel(req, res) {
   });
 }
 
-module.exports = { getTravelList, createTravel };
+function deleteTravel(req, res) {
+  const queryDelete =
+    "DELETE FROM travelsystem.touristspot WHERE `TouristSpotId` = ?";
+
+  database.query(queryDelete, [req.params.id], (error, success) => {
+    if (error) return res.json(error);
+
+    return res.status(200).json("Viagem excluída com sucesso");
+  });
+}
+
+module.exports = { getTravelList, createTravel, deleteTravel };
