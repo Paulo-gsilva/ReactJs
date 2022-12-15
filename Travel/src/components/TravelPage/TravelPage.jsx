@@ -8,6 +8,7 @@ import GridTravels from "../GridTravels/GridTravels";
 
 function TravelPage() {
   const [travels, setTravels] = useState([]);
+  const [editTravel, setEditTravel] = useState(null);
 
   const getTravelList = async () => {
     try {
@@ -26,8 +27,13 @@ function TravelPage() {
   return (
     <section className="section-travelpage">
       <Title title="VIAGENS" />
-      <Forms getTravelList={getTravelList} />
+      <Forms
+        getTravelList={getTravelList}
+        editTravel={editTravel}
+        setEditTravel={setEditTravel}
+      />
       <GridTravels
+        setEditTravel={setEditTravel}
         travels={travels}
         setTravels={setTravels}
         getTravelList={getTravelList}

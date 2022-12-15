@@ -4,7 +4,7 @@ import { toast } from "react-toastify";
 import axios from "axios";
 import "../../../styles/gridtravels.css";
 
-function Cards({ travels, setTravels, getTravelList }) {
+function Cards({ travels, setTravels, getTravelList, setEditTravel }) {
   const handleDeleteTravel = async (touristSpotId) => {
     await axios
       .delete("http://localhost:8080/" + touristSpotId)
@@ -21,6 +21,10 @@ function Cards({ travels, setTravels, getTravelList }) {
       });
 
     getTravelList();
+  };
+
+  const handleEditTravel = async (travel) => {
+    setEditTravel(travel);
   };
 
   return (
@@ -41,7 +45,7 @@ function Cards({ travels, setTravels, getTravelList }) {
               </h4>
               <p>Adicionado em: {travel.TouristSpotAddData}</p>
               <div className="card-icons">
-                <AiFillEdit />
+                <AiFillEdit onClick={() => handleEditTravel(travel)} />
                 <AiFillDelete
                   onClick={() => handleDeleteTravel(travel.TouristSpotId)}
                 />

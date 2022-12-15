@@ -1,10 +1,10 @@
-import React, { useRef } from "react";
+import React, { useEffect, useRef } from "react";
 import axios from "axios";
 import { toast } from "react-toastify";
 import "../../styles/forms.css";
 import InputArea from "./Input/Input";
 
-function Forms({ onEdit, getTravelList }) {
+function Forms({ editTravel, setEditTravel, getTravelList }) {
   const ref = useRef();
 
   const handleSubmit = async (e) => {
@@ -19,23 +19,47 @@ function Forms({ onEdit, getTravelList }) {
     )
       return toast.warn("Preencha todos os campos!");
 
-    await axios
-      .post("http://localhost:8080", {
-        TouristSpotName: formRef.TouristSpotName.value,
-        TouristSpotCountry: formRef.TouristSpotCountry.value,
-        TouristSpotCity: formRef.TouristSpotCity.value,
-        TouristSpotImage: formRef.TouristSpotImage.value,
-      })
-      .then((res) => toast.success(res.data))
-      .catch((res) => toast.error(res.data));
+    if (editTravel) {
+      await axios
+        .put("http://localhost:8080/" + editTravel.TouristSpotId, {
+          TouristSpotName: formRef.TouristSpotName.value,
+          TouristSpotCountry: formRef.TouristSpotCountry.value,
+          TouristSpotCity: formRef.TouristSpotCity.value,
+          TouristSpotImage: formRef.TouristSpotImage.value,
+        })
+        .then((res) => toast.success(res.data))
+        .catch((res) => toast.error(res.data));
+    } else {
+      await axios
+        .post("http://localhost:8080", {
+          TouristSpotName: formRef.TouristSpotName.value,
+          TouristSpotCountry: formRef.TouristSpotCountry.value,
+          TouristSpotCity: formRef.TouristSpotCity.value,
+          TouristSpotImage: formRef.TouristSpotImage.value,
+        })
+        .then((res) => toast.success(res.data))
+        .catch((res) => toast.error(res.data));
+    }
 
     formRef.TouristSpotName.value = "";
     formRef.TouristSpotCountry.value = "";
     formRef.TouristSpotCity.value = "";
     formRef.TouristSpotImage.value = "";
 
+    setEditTravel(null);
     getTravelList();
   };
+
+  useEffect(() => {
+    if (editTravel) {
+      const travel = ref.current;
+
+      travel.TouristSpotName.value = editTravel.TouristSpotName;
+      travel.TouristSpotCountry.value = editTravel.TouristSpotCountry;
+      travel.TouristSpotCity.value = editTravel.TouristSpotCity;
+      travel.TouristSpotImage.value = editTravel.TouristSpotImage;
+    }
+  }, [editTravel]);
 
   return (
     <form className="form" ref={ref} onSubmit={handleSubmit}>

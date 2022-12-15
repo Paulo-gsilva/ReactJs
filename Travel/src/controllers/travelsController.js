@@ -44,4 +44,24 @@ function deleteTravel(req, res) {
   });
 }
 
-module.exports = { getTravelList, createTravel, deleteTravel };
+function updateTravel(req, res) {
+  const dateNow = new Date().toISOString().split("T")[0];
+  const queryUpdate =
+    "UPDATE travelsystem.touristspot SET `TouristSpotName` = ?, `TouristSpotCountry` = ?, `TouristSpotImage` = ?, `TouristSpotAddData` = ?, `TouristSpotCity` = ? WHERE `TouristSpotId` = ?";
+
+  const values = [
+    req.body.TouristSpotName,
+    req.body.TouristSpotCountry,
+    req.body.TouristSpotImage,
+    (req.body.TouristSpotAddData = dateNow),
+    req.body.TouristSpotCity,
+  ];
+
+  database.query(queryUpdate, [...values, req.params.id], (error, success) => {
+    if (error) return res.json(error);
+
+    return res.status(200).json("Viagem editada com sucesso");
+  });
+}
+
+module.exports = { getTravelList, createTravel, deleteTravel, updateTravel };
