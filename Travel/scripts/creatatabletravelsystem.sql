@@ -1,9 +1,9 @@
-use travelsystem;
-create table TouristSpot(
-	TouristSpotId BIGINT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-    TouristSpotName VARCHAR(200) NOT NULL,
-    TouristSpotCountry VARCHAR(200)NOT NULL,
-    TouristSpotCity VARCHAR(200) NOT NULL,
-    TouristSpotImage VARCHAR(200)NOT NULL,
-    TouristSpotAddData DATE NOT NULL
-);
+CREATE TABLE `touristspot` (
+  `TouristSpotId` bigint NOT NULL AUTO_INCREMENT,
+  `TouristSpotName` varchar(200) NOT NULL,
+  `TouristSpotCountry` varchar(200) NOT NULL,
+  `TouristSpotCity` varchar(200) NOT NULL,
+  `TouristSpotImage` varchar(200) NOT NULL,
+  `TouristSpotAddData` varchar(200) DEFAULT NULL,
+  PRIMARY KEY (`TouristSpotId`)
+)
