@@ -6,6 +6,10 @@ const Global = createGlobalStyle`
         padding: 0;
         font-family: 'Source Sans Pro', sans-serif;
     }
+
+    a{
+        color: var(--blue-color);
+    }
 `;
 
 export default Global;

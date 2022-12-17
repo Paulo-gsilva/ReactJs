@@ -1,5 +1,6 @@
 import React from "react";
-import { AiFillEdit, AiFillDelete } from "react-icons/ai";
+import { Link } from "react-router-dom";
+import { AiFillEdit, AiFillDelete, AiFillCompass } from "react-icons/ai";
 import { toast } from "react-toastify";
 import axios from "axios";
 import "../../../styles/gridtravels.css";
@@ -45,8 +46,17 @@ function Cards({ travels, setTravels, getTravelList, setEditTravel }) {
               </h4>
               <p>Adicionado em: {travel.TouristSpotAddData}</p>
               <div className="card-icons">
-                <AiFillEdit onClick={() => handleEditTravel(travel)} />
+                <Link to={"viagem/" + travel.TouristSpotId}>
+                  <AiFillCompass
+                    title={`Saber mais sobre ${travel.TouristSpotName}`}
+                  />
+                </Link>
+                <AiFillEdit
+                  title="Editar"
+                  onClick={() => handleEditTravel(travel)}
+                />
                 <AiFillDelete
+                  title="Deletar"
                   onClick={() => handleDeleteTravel(travel.TouristSpotId)}
                 />
               </div>

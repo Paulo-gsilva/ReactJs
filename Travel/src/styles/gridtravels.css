@@ -69,10 +69,6 @@
   cursor: pointer;
 }
 
-.cards-travel .card-icons svg:first-child {
-  margin-bottom: 0.2rem;
-}
-
 @media (max-width: 800px) {
   .section-gridtravels {
     margin: 0rem;

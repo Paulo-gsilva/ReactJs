@@ -11,6 +11,17 @@ function getTravelList(req, res) {
   });
 }
 
+function getTravelByTouristSpotId(req, res) {
+  const queryGetById =
+    "SELECT * FROM travelsystem.touristspot WHERE `TouristSpotId` = ?";
+
+  database.query(queryGetById, [req.params.id], (error, success) => {
+    if (error) return res.json(error);
+
+    return res.status(200).json("Viagem encontrada! 😃");
+  });
+}
+
 function createTravel(req, res) {
   const dateNow = new Date().toISOString().split("T")[0];
   const queryPost =
@@ -29,7 +40,7 @@ function createTravel(req, res) {
       console.log(error);
       return res.json(error);
     }
-    return res.status(200).json("Viagem adicionada com sucesso");
+    return res.status(200).json("Viagem adicionada com sucesso! 😃");
   });
 }
 
@@ -40,7 +51,7 @@ function deleteTravel(req, res) {
   database.query(queryDelete, [req.params.id], (error, success) => {
     if (error) return res.json(error);
 
-    return res.status(200).json("Viagem excluída com sucesso");
+    return res.status(200).json("Viagem excluída com sucesso! 😃");
   });
 }
 
@@ -60,8 +71,14 @@ function updateTravel(req, res) {
   database.query(queryUpdate, [...values, req.params.id], (error, success) => {
     if (error) return res.json(error);
 
-    return res.status(200).json("Viagem editada com sucesso");
+    return res.status(200).json("Viagem editada com sucesso! 😃 ");
   });
 }
 
-module.exports = { getTravelList, createTravel, deleteTravel, updateTravel };
+module.exports = {
+  getTravelList,
+  getTravelByTouristSpotId,
+  createTravel,
+  deleteTravel,
+  updateTravel,
+};
