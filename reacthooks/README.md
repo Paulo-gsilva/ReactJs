@@ -201,3 +201,55 @@
                 );
             };
         ```
+
+-   **UseReducer**
+
+    -   UseReducer é similar ao UseState
+    -   UseReducer é usado para controlar estados complexos
+    -   UseReducer recebe um estado e uma função reducer como parâmetros
+    -   **Exemplo**:
+
+        ```
+            const globalStateData = {
+                title: "Título da página",
+                body: "Informações da página",
+                counter: 0,
+            };
+
+            const functionReduce = (state, action) => {
+                switch (action.type) {
+                    case "Upper":
+                        return { ...state, title: state.title.toUpperCase() };
+                    case "Lower":
+                        return { ...state, title: state.title.toLowerCase() };
+                    case "Payload":
+                        return { ...state, title: `Payload chegando: ${action.payload}` };
+                }
+                return { ...state };
+            };
+
+            const [globalState, dispatch] = useReducer(functionReduce, globalStateData);
+
+        ```
+
+    -   dispatch é função que dispara ações
+    -   **Exemplo:**
+        ```
+            {/*dispatch recebe um objeto que representa a action da função reducer*/}
+            <button onClick={() => dispatch({ type: "Upper" })}>Upper</button>
+        ```
+    -   Dentro do dispatch pode haver um payload, um valor que pode ser passado para a função reducer
+    -   **Exemplo:**
+        ```
+            {/*payload são dados que podem ser enviados para reducer*/}
+            <button
+                onClick={() =>
+                    dispatch({
+                        type: "Payload",
+                        payload: new Date().toLocaleDateString("pt-BR"),
+                    })
+                }
+            >
+                Payload
+            </button>
+        ```
