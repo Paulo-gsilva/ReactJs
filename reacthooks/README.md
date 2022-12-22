@@ -169,3 +169,35 @@
                 style={{ width: "700px", fontSize: "20px" }}
             />
     ```
+
+-   **UseContext**
+
+    -   UseContext é usado para compartilhar um mesmo "contexto" para diferentes componentes
+    -   UseContext evita a passagem de props sucessivas de um componente 1 para chegar ao componente 10
+    -   UseContext cria um "estado global"
+    -   Para ter acesso ao "estado global" nos componentes filhos é necessário importar o GlobalContext
+    -   **Exemplo**:
+
+        ```
+            //data.js
+            export const globalStateData = {
+                title: "Título da página",
+                body: "Informações da página",
+                counter: 0,
+            };
+
+            import { globalStateData } from "./data";
+            export const GlobalContext = createContext();
+
+            export const AppContext = ({ children }) => {
+                const [globalState, setGlobalState] = useState(globalStateData);
+
+                return (
+                    //O que estiver dentro deste bloco irá usar o "estado global" criado pelo  context
+                    //Não é recomendado passar um "setState" inteiro, pois pode ocasionar problemas. É recomendada a criação de funções específicas para alteração de estado
+                    <GlobalContext.Provider value={{ globalState, setGlobalState }}>
+                        {children}
+                    </GlobalContext.Provider>
+                );
+            };
+        ```
