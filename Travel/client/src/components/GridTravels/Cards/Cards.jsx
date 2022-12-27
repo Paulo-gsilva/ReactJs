@@ -5,7 +5,13 @@ import { toast } from "react-toastify";
 import axios from "axios";
 import "../../../styles/gridtravels.css";
 
-function Cards({ travels, setTravels, getTravelList, setEditTravel }) {
+function Cards({
+  travels,
+  setTravels,
+  getTravelList,
+  setEditTravel,
+  setGetTravelById,
+}) {
   const handleDeleteTravel = async (touristSpotId) => {
     await axios
       .delete("http://localhost:8080/" + touristSpotId)
@@ -26,6 +32,10 @@ function Cards({ travels, setTravels, getTravelList, setEditTravel }) {
 
   const handleEditTravel = async (travel) => {
     setEditTravel(travel);
+  };
+
+  const handleInformationTravel = async (travel) => {
+    setGetTravelById(travel);
   };
 
   return (
@@ -49,6 +59,7 @@ function Cards({ travels, setTravels, getTravelList, setEditTravel }) {
                 <Link to={"viagem/" + travel.TouristSpotId}>
                   <AiFillCompass
                     title={`Saber mais sobre ${travel.TouristSpotName}`}
+                    onClick={() => handleInformationTravel(travel)}
                   />
                 </Link>
                 <AiFillEdit

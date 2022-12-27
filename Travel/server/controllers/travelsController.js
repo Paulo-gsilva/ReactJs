@@ -1,7 +1,7 @@
-const database = require("../../database.js").database;
-const axios = require("axios");
+import { database } from "../database.js";
+import axios from "axios";
 
-function getTravelList(req, res) {
+export function getTravelList(req, res) {
   const query = "SELECT * FROM travelsystem.TouristSpot order by 1 desc";
 
   database.query(query, (error, success) => {
@@ -11,7 +11,7 @@ function getTravelList(req, res) {
   });
 }
 
-function getTravelByTouristSpotId(req, res) {
+export function getTravelByTouristSpotId(req, res) {
   const queryGetById =
     "SELECT * FROM travelsystem.touristspot WHERE `TouristSpotId` = ?";
 
@@ -22,7 +22,7 @@ function getTravelByTouristSpotId(req, res) {
   });
 }
 
-function createTravel(req, res) {
+export function createTravel(req, res) {
   const dateNow = new Date().toISOString().split("T")[0];
   const queryPost =
     "INSERT INTO travelsystem.touristspot (`TouristSpotName`,`TouristSpotCountry`, `TouristSpotImage`, `TouristSpotAddData`, `TouristSpotCity`) VALUES (?)";
@@ -44,7 +44,7 @@ function createTravel(req, res) {
   });
 }
 
-function deleteTravel(req, res) {
+export function deleteTravel(req, res) {
   const queryDelete =
     "DELETE FROM travelsystem.touristspot WHERE `TouristSpotId` = ?";
 
@@ -55,7 +55,7 @@ function deleteTravel(req, res) {
   });
 }
 
-function updateTravel(req, res) {
+export function updateTravel(req, res) {
   const dateNow = new Date().toISOString().split("T")[0];
   const queryUpdate =
     "UPDATE travelsystem.touristspot SET `TouristSpotName` = ?, `TouristSpotCountry` = ?, `TouristSpotImage` = ?, `TouristSpotAddData` = ?, `TouristSpotCity` = ? WHERE `TouristSpotId` = ?";
@@ -74,11 +74,3 @@ function updateTravel(req, res) {
     return res.status(200).json("Viagem editada com sucesso! 😃 ");
   });
 }
-
-module.exports = {
-  getTravelList,
-  getTravelByTouristSpotId,
-  createTravel,
-  deleteTravel,
-  updateTravel,
-};

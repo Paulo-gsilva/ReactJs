@@ -6,7 +6,7 @@ import { toast } from "react-toastify";
 import "../../styles/travelpage.css";
 import GridTravels from "../GridTravels/GridTravels";
 
-function TravelPage() {
+function TravelPage({ setGetTravelById }) {
   const [travels, setTravels] = useState([]);
   const [editTravel, setEditTravel] = useState(null);
 
@@ -37,6 +37,7 @@ function TravelPage() {
         travels={travels}
         setTravels={setTravels}
         getTravelList={getTravelList}
+        setGetTravelById={setGetTravelById}
       />
     </section>
   );

@@ -1,9 +1,10 @@
 import React from "react";
 
-function TravelInfo() {
+function TravelInfo({ getTravelById }) {
+  console.log(getTravelById);
   return (
     <>
-      <h1>duasidhuasd</h1>
+      <h1>{getTravelById.TouristSpotId}</h1>
       <h3>diasuoidhaiushd</h3>
     </>
   );
